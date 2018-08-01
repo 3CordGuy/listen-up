@@ -79,6 +79,9 @@
         display: block;
       }
 
+      .columns {
+        width: 100%
+      }
     </style>
   </head>
   <body>
@@ -114,9 +117,9 @@
                 <span v-if="post.payload">
                   <div class="panel-block">
                       <div class="columns">
-                          <div class="column"><span class="tag is-light">{{ post.time }}</span></div>
-                          <div class="column is-three-quarters">
-                              <code>{{ post.payload }}</code>
+                          <div class="column is-2"><span class="tag is-light">{{ post.time }}</span></div>
+                          <div class="column is-10">
+                              <pre>{{ post.payload }}</pre>
                           </div>
                       </div>
                   </div>
