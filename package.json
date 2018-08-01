@@ -24,6 +24,7 @@
   "scripts": {
     "test": "yarn run eslint && yarn run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "deploy": "now rm listen-up --safe --yes && now --public && now alias",
     "start": "node src/",
     "mocha": "mocha test/ --recursive --exit"
   },
