@@ -68,7 +68,7 @@
       }
 
       #app {
-        margin-top: 20px;
+        margin: 20px auto;
       }
 
       .hidden {
@@ -82,12 +82,16 @@
       .columns {
         width: 100%
       }
+
+      [v-cloak] {
+        display: none;
+      }
     </style>
   </head>
   <body>
       <h1 class="center-text" style="font-size: 3em;">Listen Up</h1>
       <h2 class="center-text">Super Simple Webhook Testing</h2>
-      <div id="app" class="container">
+      <div id="app" class="container" v-cloak>
     
           <div id="add-hook" class="center-text" v-if="!showListener">
             <button class="button is-dark" v-on:click="createHook">Create New Hook Endpoint</button>
@@ -112,7 +116,10 @@
     
           <div id="listen" v-if="showListener">
             <nav class="panel">
-              <p class="panel-heading">Listening for Requests... <span class="spinner"></span></p>
+              <p class="panel-heading">
+                Listening for Requests... <span class="spinner"></span>
+                <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
+              </p>
               <span v-for="post in posts">
                 <span v-if="post.payload">
                   <div class="panel-block">
@@ -132,9 +139,6 @@
           </div>
       </div>
 
-      <footer>
-        <p class="center-text">Listen Up — Copyright &copy; 2018 Joshua Weaver</p>
-      </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
