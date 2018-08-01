@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Welcome to Feathers</title>
+    <title>Listen Up - Super Simple Webhook Testing</title>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
@@ -78,6 +78,7 @@
       .expanded {
         display: block;
       }
+
     </style>
   </head>
   <body>
@@ -85,13 +86,14 @@
       <h2 class="center-text">Super Simple Webhook Testing</h2>
       <div id="app" class="container">
     
-          <div id="add-hook center-text" v-show="!showListener">
-            <button class="button is-dark is-centered" v-on:click="createHook">Create New Hook Endpoint</button>
+          <div id="add-hook" class="center-text" v-if="!showListener">
+            <button class="button is-dark" v-on:click="createHook">Create New Hook Endpoint</button>
           </div>
 
-          <article class="message">
+          <article class="message" v-if="showListener">
             <div class="message-header">
               <p>Endpoint Ready</p>
+              <span class="is-pulled-right">! Endpoints and data will expire after 8 hours</span>
             </div>
             <div class="message-body">
               <div class="field">
@@ -101,22 +103,23 @@
                   <input class="input is-dark" type="text" v-model="currentHook" readonly>
                 </div>
               </div>
-              <br>
-              <button class="button is-light is-small is-centered" v-on:click="createHook">Create New Hook Endpoint</button>
+              <button class="button is-gray is-small is-centered" v-on:click="createHook">Create New Hook Endpoint</button>
             </div>
           </article>
     
-          <div id="listen" v-show="showListener">
+          <div id="listen" v-if="showListener">
             <nav class="panel">
               <p class="panel-heading">Listening for Requests... <span class="spinner"></span></p>
               <span v-for="post in posts">
                 <span v-if="post.payload">
-                  <a class="panel-block">
-                      <span class="tag is-light">{{post.time}}</span>  
-                      <div>
-                          <code>{{ post.payload }}</code>
+                  <div class="panel-block">
+                      <div class="columns">
+                          <div class="column"><span class="tag is-light">{{ post.time }}</span></div>
+                          <div class="column is-three-quarters">
+                              <code>{{ post.payload }}</code>
+                          </div>
                       </div>
-                  </a>
+                  </div>
                 </span>
               </span>
               <div class="panel-block">
@@ -130,7 +133,7 @@
         <p class="center-text">Listen Up — Copyright &copy; 2018 Joshua Weaver</p>
       </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>

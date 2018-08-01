@@ -19,6 +19,9 @@ var listen_vue = new Vue({
 	},
 	methods: {
 		addPost: function (post) {
+			const time = dateFns.format(dateFns.parse(post.time), 'MM/DD/YY hh:mm:ss a');
+			post.time = time;
+			
 			this.posts.unshift(post);
 		},
 		clearList: function (post) {

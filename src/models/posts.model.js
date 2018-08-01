@@ -9,7 +9,7 @@ module.exports = function (app) {
     autoload: true
   });
 
-  Model.ensureIndex({ fieldName: 'createdAt', expireAfterSeconds: 3600 });
+  Model.ensureIndex({ fieldName: 'createdAt', expireAfterSeconds: 30 });
 
   return Model;
 };
