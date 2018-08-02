@@ -17,12 +17,8 @@ There are many things I'd like to do yet with this work in progress.
 - Data persistence
   - Right now data does persist up to 8 hours but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
   - When data is stale, the client isn't notified
-  - No way to reuse an particular endpoint when it becomes stale
 - UI Improvements
   - Build an actual front end? ;)
-  - Add option to view request headers to each post
-  - Add Counter
-  - Add ability to refresh the stale endpoint
   - Add ability to see status of endpoint's lifespan
   
 
