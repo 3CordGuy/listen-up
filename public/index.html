@@ -86,6 +86,11 @@
       [v-cloak] {
         display: none;
       }
+      
+      .count {
+        margin-top: 2px;
+        margin-right: 4px;
+      }
     </style>
   </head>
   <body>
@@ -93,13 +98,15 @@
       <h2 class="center-text">Super Simple Webhook Testing</h2>
       <div id="app" class="container" v-cloak>
     
-          <div id="add-hook" class="center-text" v-if="!showListener">
+          <div class="center-text" v-if="!showListener">
             <button class="button is-dark" v-on:click="createHook">Create New Hook Endpoint</button>
           </div>
 
+
           <article class="message" v-if="showListener">
             <div class="message-header">
-              <p>Endpoint Ready</p>
+              <span v-if="!staleHook"><p>Endpoint Ready</p></span>
+              <span v-if="staleHook"><p>Endpoint Expired</p></span>
               <span class="is-pulled-right">! Endpoints and data will expire after 8 hours</span>
             </div>
             <div class="message-body">
@@ -107,31 +114,55 @@
                 <label for="">Make a <strong>POST</strong> request with <code>Content-Type</code> <code>application/json</code> to:</label>
 
                 <div class="control">
-                  <input class="input is-dark" type="text" v-model="currentHook" readonly>
+                  <input class="input is-dark" type="text" v-model="currentEndpoint" readonly>
                 </div>
               </div>
               <button class="button is-gray is-small is-centered" v-on:click="createHook">Create New Hook Endpoint</button>
             </div>
           </article>
+
+          <article class="message is-danger" v-if="staleHook">
+            <div class="message-body">
+              <p>Looks like you need a new endpoint or to renew your existing one.</p>
+              <button class="button is-gray is-small is-centered" v-on:click="renewHook">Renew Endpoint</button>
+          </article>
     
-          <div id="listen" v-if="showListener">
+          <div id="listen" v-if="showRequests">
             <nav class="panel">
               <p class="panel-heading">
                 Listening for Requests... <span class="spinner"></span>
                 <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
+                <span class="count tag is-rounded is-dark is-small is-pulled-right">Received {{count}}</span>
               </p>
-              <span v-for="post in posts">
-                <span v-if="post.payload">
-                  <div class="panel-block">
-                      <div class="columns">
-                          <div class="column is-2"><span class="tag is-light">{{ post.time }}</span></div>
-                          <div class="column is-10">
-                              <pre>{{ post.payload }}</pre>
+              <post-block v-for="post in posts"
+                          v-bind:post="post" :key="post._id" inline-template>
+                <div class="panel-block">
+                  <div class="columns">
+                      <div class="column is-2">
+                        <div class="field">
+                            <div class="tag is-light">{{ post.time }}</div>
+                        </div>
+                        <div class="field">
+                            <div class="tag is-small is-light">
+                                <small><a @click="toggleHeaders">Show Headers</a></small>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="column is-10">
+                        <div class="field">
+                          <label for="">Body:</label>
+                            <pre>{{ post.payload }}</pre>
+                        </div>
+                        <div v-show="showHeaders">
+                          <div class="field">
+                            <label for="">Headers:</label>
+                            <pre>{{ post.headers }}</pre>
                           </div>
+                        </div>
                       </div>
                   </div>
-                </span>
-              </span>
+                </div>
+              </post-block>
               <div class="panel-block">
                 <button class="button is-small" v-on:click="clearList">Clear List</button>
               </div>
@@ -140,7 +171,7 @@
       </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>

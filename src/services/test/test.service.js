@@ -10,8 +10,10 @@ module.exports = function (app) {
       const { query, request } = params;
       const { data } = await app.service('webhooks').find({ query: { _id: query.webhook }});
       
-      if (!data || data.length < 1) return new errors.BadRequest('Invalid ID or Webhook has expired');
-
+      if (!data || data.length < 1) {
+        return new errors.BadRequest('Invalid ID or Webhook has expired');
+      }
+      
       const post = Object.assign(
         { payload }, 
         { headers: request.headers },
