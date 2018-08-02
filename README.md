@@ -6,9 +6,11 @@
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
-It's a very rudimentary webhook listening platform that will display your `POST` requests to endpoints in realtime.
+**Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to endpoints in realtime. This is meant to be useful for prototyping and developing webhooks.
 
 You can run it locally and tunnel your requests to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Zeit Now](https://zeit.co/now)).
+
+You can preview or try the [demo here](https://listenup.now.sh) courtesy of Zeit. :)
 
 ## TODO:
 
