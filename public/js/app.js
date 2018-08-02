@@ -50,12 +50,16 @@ var listen_vue = new Vue({
 		}
 	},
 	mounted: async function (data) {
-		const _id = URI().search().split('=')[1];
-		let hook;
+		let _id = URI().search().split('=')[1];
+		
+		if (!_id) {
+			this.showListener = false
+			this.showRequests = false
+			return;
+		}
 
 		try {
 			hook = await client.service('webhooks').get(_id);
-			console.log(hook)
 			this.showRequests = true
 		} 
 		catch (error) {
@@ -78,7 +82,6 @@ Vue.component('post-block', {
 	},
 	methods: {
 		toggleHeaders: function (e) {
-			console.log('clicked!!')
 			this.showHeaders = !this.showHeaders;
 		}
 	}
