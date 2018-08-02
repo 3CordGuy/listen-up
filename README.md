@@ -8,6 +8,24 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 It's a very rudimentary webhook listening platform that will display your `POST` requests to endpoints in realtime.
 
+You can run it locally and tunnel your requests to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Zeit Now](https://zeit.co/now)).
+
+## TODO:
+
+There are many things I'd like to do yet with this work in progress. 
+
+- Data persistence
+  - Right now data does persist up to 8 hours but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
+  - When data is stale, the client isn't notified
+  - No way to reuse an particular endpoint when it becomes stale
+- UI Improvements
+  - Build an actual front end? ;)
+  - Add option to view request headers to each post
+  - Add Counter
+  - Add ability to refresh the stale endpoint
+  - Add ability to see status of endpoint's lifespan
+  
+
 ## Getting Started
 
 Getting up and running is as easy as 1, 2, 3.
@@ -16,7 +34,9 @@ Getting up and running is as easy as 1, 2, 3.
 2. Install your dependencies
 
     ```
-    cd path/to/listen-up; npm install
+    cd path/to/listen-up; 
+    
+    npm install
     ```
 
 3. Start your app
