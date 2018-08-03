@@ -1,193 +1,246 @@
 <html>
-  <head>
-    <title>Listen Up - Super Simple Webhook Testing</title>
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      .center-text {
-        text-align: center;
-      }
+<head>
+  <title>Listen Up - Super Simple Webhook Testing</title>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .center-text {
+      text-align: center;
+    }
 
 
-      h1, h2, h3, h4 {
-        font-family: 'Playfair Display', serif;
-      }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Playfair Display', serif;
+    }
 
-      h1 {
-        font-weight: 900;
-      }
+    h1 {
+      font-weight: 900;
+    }
 
-      h2 {
-        font-size: 2em;
-        font-weight: 100;
-      }
+    h2 {
+      font-size: 2em;
+      font-weight: 100;
+    }
 
-      footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px;
-      }
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+    }
 
-      footer p {
-        font-weight: 300;
-        font-size: 1.0em;
-      }
+    footer p {
+      font-weight: 300;
+      font-size: 1.0em;
+    }
 
-      .spinner {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-      }
-      .spinner:after {
-        content: " ";
-        display: block;
-        width: 24px;
-        height: 24px;
-        margin: 5px auto;
-        border-radius: 50%;
-        border: 5px solid #ccc;
-        border-color: #ccc transparent #ccc transparent;
-        animation: spinner 1.2s linear infinite;
-      }
-      @keyframes spinner {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+    .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+    }
 
-      #app {
-        margin: 20px auto;
-      }
+    .spinner:after {
+      content: " ";
+      display: block;
+      width: 24px;
+      height: 24px;
+      margin: 5px auto;
+      border-radius: 50%;
+      border: 5px solid #ccc;
+      border-color: #ccc transparent #ccc transparent;
+      animation: spinner 1.2s linear infinite;
+    }
 
-      .hidden {
-        display: none;
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
       }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-      .expanded {
-        display: block;
-      }
+    #app {
+      margin: 20px auto;
+    }
 
-      .columns {
-        width: 100%
-      }
+    .hidden {
+      display: none;
+    }
 
-      [v-cloak] {
-        display: none;
-      }
-      
-      .count {
-        margin-top: 2px;
-        margin-right: 4px;
-      }
-    </style>
-  </head>
-  <body>
-      <h1 class="center-text" style="font-size: 3em;">Listen Up</h1>
-      <h2 class="center-text">Super Simple Webhook Testing</h2>
+    .expanded {
+      display: block;
+    }
+
+    .columns {
+      width: 100%
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+
+    .count {
+      margin-top: 2px;
+      margin-right: 4px;
+    }
+
+    .panel {
+      background: #fff;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity .2s;
+    }
+
+    .fade-enter,
+    .fade-leave-to
+    /* .fade-leave-active below version 2.1.8 */
+
+      {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero is-warning is-bold is-fullheight">
+    <div class="hero-body">
       <div id="app" class="container" v-cloak>
-    
-          <!--CREATE HOOK BUTTON-->
-          <div class="center-text" v-if="!showListener">
-            <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook Endpoint</button>
-          </div>
+        <h1 class="center-text" style="font-size: 5em;">
+          <i class="fas fa-headphones"></i>
+        </h1>
+        <h1 class="title center-text" style="font-size: 3em;">Listen Up</h1>
+        <h2 class="subtitle center-text">Super Simple Webhook Testing</h2>
+        <!--CREATE HOOK BUTTON-->
+        <div class="center-text" v-if="!showListener">
+          <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook Endpoint</button>
+        </div>
 
-          <!--TOP MESSAGE PANEL-->
-          <article class="message" v-if="showListener">
-            <div class="message-header">
-              <span v-if="!staleHook"><p>Endpoint Ready</p></span>
-              <span v-if="staleHook"><p>Endpoint Expired</p></span>
-            </div>
-            <div class="message-body">
-              <div class="field">
-                <div class="field-body">
-                  <div class="field has-addons">
-                      <div class="control is-expanded">
-                        <input class="input is-light" type="text" v-model="currentEndpoint" id="endpoint" readonly>
-                      </div>
-                      <div class="control">
-                        <a class="button is-light-grey" v-on:click="copyText">Copy</a>
-                      </div>
+        <!--TOP MESSAGE PANEL-->
+        <article class="message is-dark" v-if="showListener">
+          <div class="message-header">
+            <span v-if="!staleHook">
+              <p>
+                <i class="far fa-check-circle"></i> Endpoint Ready</p>
+            </span>
+            <span v-if="staleHook">
+              <p>
+                <i class="fas fa-ban"></i>Endpoint Expired</p>
+            </span>
+          </div>
+          <div class="message-body">
+            <div class="field">
+              <div class="field-body">
+                <div class="field has-addons">
+                  <div class="control is-expanded">
+                    <input class="input is-light" type="text" v-model="currentEndpoint" id="endpoint" readonly>
+                  </div>
+                  <div class="control">
+                    <a class="button is-light-grey" v-on:click="copyText">
+                      <span class="icon is-small">
+                        <i class="fas fa-copy"></i>
+                      </span>
+                      <span>Copy</span>
+                    </a>
                   </div>
                 </div>
               </div>
-              
-              <button class="button is-gray is-small is-centered" 
-                      v-bind:class="{ 'is-loading': isLoading }" 
-                      v-on:click="createHook">
-                      Create New Hook Endpoint
-              </button>
-              <small class="is-pulled-right"><em>Endpoints expire after 8 hours. Data is not persisted.</em></small>
             </div>
-          </article>
 
-          <!--ERROR MESSAGE PANEL-->
-          <article class="message is-danger" v-if="staleHook">
-            <div class="message-body">
-              <p>Looks like you need a new endpoint or to renew your existing one.</p>
-              <button class="button is-gray is-small is-centered" v-on:click="renewHook">Renew Endpoint</button>
-          </article>
-    
-          <!--LISTENER LIST PANEL-->
-          <div id="listen" v-if="showRequests">
-            <nav class="panel">
-              <p class="panel-heading">
-                Listening for Requests... <span class="spinner"></span>
-                <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
-                <span class="count tag is-rounded is-dark is-small is-pulled-right">Received {{count}}</span>
-              </p>
-              <post-block v-for="post in posts"
-                          v-bind:post="post" :key="post._id" inline-template>
+            <button class="button is-gray is-small is-centered" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
+              Create New Hook Endpoint
+            </button>
+            <small class="is-pulled-right">
+              <em>Endpoints expire after 8 hours. Data is not persisted.</em>
+            </small>
+          </div>
+        </article>
+
+        <!--ERROR MESSAGE PANEL-->
+        <article class="message is-danger" v-if="staleHook">
+          <div class="message-body">
+            <p>Looks like you need a new endpoint or to renew your existing one.</p>
+            <button class="button is-gray is-small is-centered" v-on:click="renewHook">Renew Endpoint</button>
+        </article>
+
+        <!--LISTENER LIST PANEL-->
+        <div id="listen" v-if="showRequests">
+          <nav class="panel">
+            <p class="panel-heading">
+              Listening for Requests...
+              <span class="spinner"></span>
+              <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
+              <span class="count tag is-rounded is-dark is-small is-pulled-right">Received {{count}}</span>
+            </p>
+            <post-block v-for="post in posts" v-bind:post="post" :key="post._id" inline-template>
+              <transition name="fade">
                 <div class="panel-block">
                   <div class="columns">
-                      <div class="column is-2">
-                        <div class="field">
-                            <div class="tag is-light">{{ post.time }}</div>
-                        </div>
-                        <div class="field">
-                            <a class="button is-small" @click="toggleHeaders">
-                            {{ showHide }} Headers
-                            </a>
-                        </div>
+                    <div class="column is-2">
+                      <div class="field">
+                        <div class="tag is-light">{{ post.time }}</div>
                       </div>
-                      <div class="column is-10">
-                        <div class="field">
-                          <label for="">Body:</label>
-                            <pre>{{ post.payload }}</pre>
-                        </div>
+                      <div class="field">
+                        <a class="button is-small" @click="toggleHeaders">
+                          <span class="icon is-small">
+                            <i class="fas fa-eye"></i>
+                          </span>
+                          <span>
+                            {{ showHide }} Headers
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="column is-10">
+                      <div class="field">
+                        <label for="">Body:</label>
+                        <pre>{{ post.payload }}</pre>
+                      </div>
+                      <transition name="fade">
                         <div v-show="showHeaders">
                           <div class="field">
                             <label for="">Headers:</label>
                             <pre>{{ post.headers }}</pre>
                           </div>
                         </div>
-                      </div>
+                      </transition>
+                    </div>
                   </div>
                 </div>
-              </post-block>
-              <div class="panel-block">
-                <button class="button is-small" v-on:click="clearList">Clear List</button>
-              </div>
-            </nav>
-          </div>
+              </transition>
+            </post-block>
+            <div class="panel-block">
+              <button class="button is-small" v-on:click="clearList">Clear List</button>
+            </div>
+          </nav>
+        </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+        <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>
+        <script src="js/app.js"></script>
       </div>
+  </section>
+</body>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
-    <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>
-    <script src="js/app.js"></script>
-  </body>
 </html>
