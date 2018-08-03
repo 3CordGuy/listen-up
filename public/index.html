@@ -98,35 +98,48 @@
       <h2 class="center-text">Super Simple Webhook Testing</h2>
       <div id="app" class="container" v-cloak>
     
+          <!--CREATE HOOK BUTTON-->
           <div class="center-text" v-if="!showListener">
-            <button class="button is-dark" v-on:click="createHook">Create New Hook Endpoint</button>
+            <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook Endpoint</button>
           </div>
 
-
+          <!--TOP MESSAGE PANEL-->
           <article class="message" v-if="showListener">
             <div class="message-header">
               <span v-if="!staleHook"><p>Endpoint Ready</p></span>
               <span v-if="staleHook"><p>Endpoint Expired</p></span>
-              <span class="is-pulled-right">! Endpoints and data will expire after 8 hours</span>
             </div>
             <div class="message-body">
               <div class="field">
-                <label for="">Make a <strong>POST</strong> request with <code>Content-Type</code> <code>application/json</code> to:</label>
-
-                <div class="control">
-                  <input class="input is-dark" type="text" v-model="currentEndpoint" readonly>
+                <div class="field-body">
+                  <div class="field has-addons">
+                      <div class="control is-expanded">
+                        <input class="input is-light" type="text" v-model="currentEndpoint" id="endpoint" readonly>
+                      </div>
+                      <div class="control">
+                        <a class="button is-light-grey" v-on:click="copyText">Copy</a>
+                      </div>
+                  </div>
                 </div>
               </div>
-              <button class="button is-gray is-small is-centered" v-on:click="createHook">Create New Hook Endpoint</button>
+              
+              <button class="button is-gray is-small is-centered" 
+                      v-bind:class="{ 'is-loading': isLoading }" 
+                      v-on:click="createHook">
+                      Create New Hook Endpoint
+              </button>
+              <small class="is-pulled-right"><em>Endpoints expire after 8 hours. Data is not persisted.</em></small>
             </div>
           </article>
 
+          <!--ERROR MESSAGE PANEL-->
           <article class="message is-danger" v-if="staleHook">
             <div class="message-body">
               <p>Looks like you need a new endpoint or to renew your existing one.</p>
               <button class="button is-gray is-small is-centered" v-on:click="renewHook">Renew Endpoint</button>
           </article>
     
+          <!--LISTENER LIST PANEL-->
           <div id="listen" v-if="showRequests">
             <nav class="panel">
               <p class="panel-heading">
@@ -143,9 +156,9 @@
                             <div class="tag is-light">{{ post.time }}</div>
                         </div>
                         <div class="field">
-                            <div class="tag is-small is-light">
-                                <small><a @click="toggleHeaders">Show Headers</a></small>
-                            </div>
+                            <a class="button is-small" @click="toggleHeaders">
+                            {{ showHide }} Headers
+                            </a>
                         </div>
                       </div>
                       <div class="column is-10">

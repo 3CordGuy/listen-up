@@ -6,6 +6,7 @@ client.configure(feathers.socketio(socket));
 var listen_vue = new Vue({
   el: '#app',
   data: {
+		isLoading: false,
 		currentHookId: '',
 		currentEndpoint: '',
 		showRequests: false,
@@ -19,6 +20,14 @@ var listen_vue = new Vue({
     }
   },
 	methods: {
+		copyText: function() {
+			var copyText = document.getElementById("endpoint");
+			copyText.select();
+
+			if (typeof document.execCommand === 'function'){
+				document.execCommand("copy");
+			}
+		},
 		addPost: function (post) {
 			const time = dateFns.format(dateFns.parse(post.time), 'MM/DD/YY hh:mm:ss a');
 			post.time = time;
@@ -36,6 +45,7 @@ var listen_vue = new Vue({
 		},
 		renewHook: async function (data) {
 			try {
+				this.isLoading = true;
 				const hook = await client.service('webhooks').create({
 					_id: this.currentHookId
 				});
@@ -47,18 +57,21 @@ var listen_vue = new Vue({
 			catch (e) {
 				this.currentHookId = hook._id;
 			}
+			this.isLoading = false;
 		}
 	},
 	mounted: async function (data) {
 		let _id = URI().search().split('=')[1];
 		
 		if (!_id) {
+			console.log('no id provided')
 			this.showListener = false
 			this.showRequests = false
 			return;
 		}
 
 		try {
+			this.isLoading = true;
 			hook = await client.service('webhooks').get(_id);
 			this.showRequests = true
 		} 
@@ -67,6 +80,7 @@ var listen_vue = new Vue({
 			this.showRequests = false
 		}
 
+		this.isLoading = false;
 		this.showListener = true;
 		this.currentHookId = _id;
 		this.currentEndpoint = [location.protocol, '//', location.host, location.pathname].join('') + "test/" + _id;
@@ -77,8 +91,13 @@ Vue.component('post-block', {
 	props: ['post'],
 	data: function () {
 		return {
-			showHeaders: false
+			showHeaders: false,
 		};
+	},
+	computed: {
+		showHide: function() {
+			return this.showHeaders ? 'Hide' : 'Show';
+		}
 	},
 	methods: {
 		toggleHeaders: function (e) {
