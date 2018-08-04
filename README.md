@@ -17,12 +17,12 @@ You can preview or try the [demo here](https://listenup.now.sh) courtesy of Zeit
 There are many things I'd like to do yet with this work in progress. 
 
 - Data persistence
-  - Right now data does persist up to 8 hours but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
+  - Right now hooks persist up to 8 hours but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
   - When data is stale, the client isn't notified
 - UI Improvements
   - Build an actual front end? ;)
   - Add ability to see status of endpoint's lifespan
-  
+
 
 ## Getting Started
 
