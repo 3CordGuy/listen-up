@@ -2,11 +2,11 @@
 
 <head>
   <title>Listen Up - Super Simple Webhook Testing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Test your webhooks by using a simple generated endpoint and see your HTTP request come through in realtime.">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-    crossorigin="anonymous">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
   <style>
     * {
@@ -15,10 +15,14 @@
       box-sizing: border-box;
     }
 
-    .center-text {
+    .has-text-centered {
       text-align: center;
     }
 
+    .title-text {
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+    }
 
     h1,
     h2,
@@ -36,35 +40,22 @@
       font-weight: 100;
     }
 
-    footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 20px;
-    }
-
-    footer p {
-      font-weight: 300;
-      font-size: 1.0em;
-    }
-
     .spinner {
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
     }
 
     .spinner:after {
       content: " ";
       display: block;
-      width: 24px;
-      height: 24px;
-      margin: 5px auto;
+      width: 18px;
+      height: 18px;
+      margin: 2px auto;
       border-radius: 50%;
-      border: 5px solid #ccc;
-      border-color: #ccc transparent #ccc transparent;
-      animation: spinner 1.2s linear infinite;
+      border: 5px solid #333;
+      border-color: #333 transparent #333 transparent;
+      animation: spinner 1.5s linear infinite;
     }
 
     @keyframes spinner {
@@ -101,10 +92,6 @@
       margin-right: 4px;
     }
 
-    .panel {
-      background: #fff;
-    }
-
     .fade-enter-active,
     .fade-leave-active {
       transition: opacity .2s;
@@ -124,13 +111,13 @@
   <section class="hero is-warning is-bold is-fullheight">
     <div class="hero-body">
       <div id="app" class="container" v-cloak>
-        <h1 class="center-text" style="font-size: 5em;">
+        <h1 class="has-text-centered" style="font-size: 5em;">
           <i class="fas fa-headphones"></i>
         </h1>
-        <h1 class="title center-text" style="font-size: 3em;">Listen Up</h1>
-        <h2 class="subtitle center-text">Super Simple Webhook Testing</h2>
+        <h1 class="title has-text-centered is-size-1">Listen Up</h1>
+        <h2 class="subtitle is-size-5 has-text-centered">Super Simple Webhook Testing</h2>
         <!--CREATE HOOK BUTTON-->
-        <div class="center-text" v-if="!showListener">
+        <div class="has-text-centered" v-if="!showListener">
           <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook Endpoint</button>
         </div>
 
@@ -151,7 +138,7 @@
               <div class="field-body">
                 <div class="field has-addons">
                   <div class="control is-expanded">
-                    <input class="input is-light" type="text" v-model="currentEndpoint" id="endpoint" readonly>
+                    <input class="input" type="text" v-model="currentEndpoint" id="endpoint" readonly>
                   </div>
                   <div class="control">
                     <a class="button is-light-grey" v-on:click="copyText">
@@ -165,12 +152,9 @@
               </div>
             </div>
 
-            <button class="button is-gray is-small is-centered" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
+            <button class="button is-gray" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
               Create New Hook Endpoint
             </button>
-            <small class="is-pulled-right">
-              <em>Endpoints expire after 8 hours. Data is not persisted.</em>
-            </small>
           </div>
         </article>
 
@@ -184,15 +168,15 @@
         <!--LISTENER LIST PANEL-->
         <div id="listen" v-if="showRequests">
           <nav class="panel">
-            <p class="panel-heading">
-              Listening for Requests...
+            <p class="panel-heading is-clearfix">
               <span class="spinner"></span>
+              Listening for Requests...
               <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
               <span class="count tag is-rounded is-dark is-small is-pulled-right">Received {{count}}</span>
             </p>
             <post-block v-for="post in posts" v-bind:post="post" :key="post._id" inline-template>
               <transition name="fade">
-                <div class="panel-block">
+                <div class="panel-block has-background-white">
                   <div class="columns">
                     <div class="column is-2">
                       <div class="field">
@@ -210,27 +194,31 @@
                       </div>
                     </div>
                     <div class="column is-10">
-                      <div class="field">
-                        <label for="">Body:</label>
-                        <pre>{{ post.payload }}</pre>
-                      </div>
                       <transition name="fade">
                         <div v-show="showHeaders">
                           <div class="field">
-                            <label for="">Headers:</label>
                             <pre>{{ post.headers }}</pre>
                           </div>
                         </div>
                       </transition>
+                      <div class="field">
+                        <pre>{{ post.payload }}</pre>
+                      </div>
                     </div>
                   </div>
                 </div>
               </transition>
             </post-block>
-            <div class="panel-block">
+            <div class="panel-block has-background-white" v-if="!posts.length">
+              No Data
+            </div>
+            <div class="panel-block has-background-light">
               <button class="button is-small" v-on:click="clearList">Clear List</button>
             </div>
           </nav>
+          <small class="tag">
+            <em>Endpoints expire after 8 hours. Data is not persisted.</em>
+          </small>
         </div>
         </div>
 
@@ -240,6 +228,23 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>
         <script src="js/app.js"></script>
+      </div>
+      <div class="hero-foot is-warning is-bold">
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <div>
+              Listen Up &copy; 2018 Josh Weaver
+            </div>
+            <a href="https://github.com/3Cordguy/listen-up">
+              <span class="icon is-large">
+                <i class="fab fa-2x fa-github-square"></i>
+              </span>
+            </a>
+            <a href="https://bulma.io">
+              <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+            </a>
+          </div>
+        </footer>
       </div>
   </section>
 </body>
