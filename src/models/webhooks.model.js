@@ -9,7 +9,9 @@ module.exports = function (app) {
     autoload: true
   });
 
-  Model.ensureIndex({ fieldName: 'createdAt', expireAfterSeconds: 28800 });
+  Model.ensureIndex({ fieldName: 'updatedAt', expireAfterSeconds: 28800 });
+
+  Model.persistence.setAutocompactionInterval(1000 * 60 * 30) // Compact data every 30 min
 
   return Model;
 };
