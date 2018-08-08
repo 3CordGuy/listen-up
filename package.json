@@ -2,14 +2,14 @@
   "name": "listen-up",
   "description": "Simple Webhook Listeners",
   "version": "0.0.0",
-  "homepage": "",
+  "homepage": "https://github.com/3Cordguy/listen-up",
   "main": "src",
   "keywords": [
-    "feathers"
+    "feathers", "nedb", "bulma"
   ],
   "author": {
     "name": "",
-    "email": ""
+    "email": "jweaver911@gmail.com"
   },
   "contributors": [],
   "bugs": {},

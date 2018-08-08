@@ -92,6 +92,11 @@
       margin-right: 4px;
     }
 
+    code {
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+
     .fade-enter-active,
     .fade-leave-active {
       transition: opacity .2s;
@@ -210,7 +215,7 @@
               </transition>
             </post-block>
             <div class="panel-block has-background-white" v-if="!posts.length">
-              No Data
+              Yo! I'm listening for <code>POST</code> requests with <code>Content-Type: application/json</code>. Send one to the endpoint above! 
             </div>
             <div class="panel-block has-background-light">
               <button class="button is-small" v-on:click="clearList">Clear List</button>
