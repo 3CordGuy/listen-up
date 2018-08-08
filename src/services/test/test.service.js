@@ -5,13 +5,13 @@ const errors = require('@feathersjs/errors');
 module.exports = function (app) {
   const test = {
     async create(payload, params) {
-      if (!payload) new errors.BadRequest('Must Provide webhook ID /test/<your-webhook-id>');
+      if (!payload) throw new errors.BadRequest('Must Provide webhook ID /test/<your-webhook-id>');
       
       const { query, request } = params;
       const { data } = await app.service('webhooks').find({ query: { _id: query.webhook }});
       
       if (!data || data.length < 1) {
-        return new errors.BadRequest('Invalid ID or Webhook has expired');
+        throw new errors.BadRequest('Invalid ID or Webhook has expired');
       }
       
       const post = Object.assign(
@@ -21,6 +21,9 @@ module.exports = function (app) {
         { webhook: query.webhook }
       );
       const result = await app.service('posts').create(post);
+
+      // Renew webhook endpoint
+      await app.service('webhooks').patch(data[0]._id, { updatedAt: new Date() })
 
       return result;
     },
