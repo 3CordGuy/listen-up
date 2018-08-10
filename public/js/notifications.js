@@ -5,6 +5,7 @@ function setupNotify() {
     console.log("This browser does not support system notifications");
   } else if (Notification.permission !== "denied") {
     Notification.requestPermission(function(permission) {
+      var text = "Notifications are enabled!";
       if (permission === "granted") {
         var notification = new Notification("Webhook Alerts", {
           body: text,
@@ -16,7 +17,6 @@ function setupNotify() {
 }
 
 function sendNotification(msg) {
-  var message = msg && msg.text ? msg.text : "New Webhook Received";
   var title = msg && msg.title ? msg.title : "Webhook Alerts";
 
   var img = "/listen-up-phones.png";
