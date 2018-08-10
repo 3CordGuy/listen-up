@@ -21,9 +21,12 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 There are a few things I'd like to do yet with this small project.
 
 - Data persistence
+
   - Right now hooks persist up to 8 hours (without activity) but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
+
 - UI Improvements
   - Build an actual front end? ;)
+  - Improve Notification system
 
 ## Getting Started
 

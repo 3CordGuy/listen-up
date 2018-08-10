@@ -2,7 +2,7 @@ function setupNotify() {
   // Let's check if the browser supports notifications
   var img = "/listen-up-phones.png";
   if (!("Notification" in window)) {
-    alert("This browser does not support system notifications");
+    console.log("This browser does not support system notifications");
   } else if (Notification.permission === "granted") {
     var notification = new Notification("Hi there!");
 
