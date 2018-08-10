@@ -8,6 +8,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
+  <script src="js/notifications.js"></script>
+
   <style>
     * {
       margin: 0;
@@ -131,22 +133,32 @@
           <div class="message-header">
             <span v-if="!staleHook">
               <p>
-                <i class="far fa-check-circle"></i> Endpoint Ready</p>
+                <i class="far fa-check-circle"></i> Endpoint Ready
+
+              </p>
             </span>
             <span v-if="staleHook">
               <p>
-                <i class="fas fa-ban"></i>Endpoint Expired</p>
+                <i class="fas fa-ban"></i> Endpoint Expired</p>
             </span>
           </div>
           <div class="message-body">
             <div class="field">
               <div class="field-body">
                 <div class="field has-addons">
+                  <div class="control">
+                    <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
+                      <span class="icon is-small">
+                        <i class="fas fa-plus"></i>
+                      </span>
+                      <span>New Endpoint</span>
+                    </button>
+                  </div>
                   <div class="control is-expanded">
-                    <input class="input" type="text" v-model="currentEndpoint" id="endpoint" readonly>
+                    <input class="input is-dark" type="text" v-model="currentEndpoint" id="endpoint" readonly>
                   </div>
                   <div class="control">
-                    <a class="button is-light-grey" v-on:click="copyText">
+                    <a class="button is-info" v-on:click="copyText">
                       <span class="icon is-small">
                         <i class="fas fa-copy"></i>
                       </span>
@@ -156,10 +168,6 @@
                 </div>
               </div>
             </div>
-
-            <button class="button is-gray" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
-              Create New Hook Endpoint
-            </button>
           </div>
         </article>
 
@@ -177,7 +185,7 @@
               <span class="spinner"></span>
               Listening for Requests...
               <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
-              <span class="count tag is-rounded is-dark is-small is-pulled-right">Received {{count}}</span>
+              <span class="count tag is-rounded is-small is-pulled-right">Received {{count}}</span>
             </p>
             <post-block v-for="post in posts" v-bind:post="post" :key="post._id" inline-template>
               <transition name="fade">
@@ -214,15 +222,17 @@
                 </div>
               </transition>
             </post-block>
-            <div class="panel-block has-background-white" v-if="!posts.length">
-              Yo! I'm listening for <code>POST</code> requests with <code>Content-Type: application/json</code>. Send one to the endpoint above! 
+            <div class="panel-block has-background-white" v-if="!posts.length">Yo! I'm listening for
+              <code>POST</code> requests with
+              <code>Content-Type: application/json</code>. Send one to the endpoint above!
             </div>
             <div class="panel-block has-background-light">
               <button class="button is-small" v-on:click="clearList">Clear List</button>
             </div>
           </nav>
-          <small class="tag">
-            <em>Endpoints expire after 8 hours. Data is not persisted.</em>
+          <small class="tag is-warning">
+            <em>Endpoint
+              <span v-show="willExpire">Expires {{ willExpire }}</span>. Data is not persisted.</em>
           </small>
         </div>
         </div>
