@@ -6,9 +6,9 @@
 
 ## About
 
-**Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to endpoints in realtime. This is meant to be useful for prototyping and developing webhooks.
+**Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to generated endpoints in realtime. This is meant to be useful for prototyping and developing [webhooks](https://en.wikipedia.org/wiki/Webhook).
 
-You can run it locally and tunnel your requests to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Zeit Now](https://zeit.co/now)).
+You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Zeit Now](https://zeit.co/now)).
 
 You can preview or try the [demo here](https://listenup.now.sh) courtesy of Zeit. :)
 
@@ -18,10 +18,10 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 ## TODO:
 
-There are many things I'd like to do yet with this work in progress.
+There are a few things I'd like to do yet with this small project.
 
 - Data persistence
-  - Right now hooks persist up to 8 hours but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
+  - Right now hooks persist up to 8 hours (without activity) but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
 - UI Improvements
   - Build an actual front end? ;)
 
