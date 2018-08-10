@@ -25,7 +25,7 @@ There are a few things I'd like to do yet with this small project.
   - Right now hooks persist up to 8 hours (without activity) but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
 
 - UI Improvements
-  - Build an actual front end? ;)
+  - Build an "actual" SPA front-end (single-page app with router)? ;)
   - Improve Notification system
 
 ## Getting Started
