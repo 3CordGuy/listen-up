@@ -3,14 +3,6 @@ function setupNotify() {
   var img = "/listen-up-phones.png";
   if (!("Notification" in window)) {
     console.log("This browser does not support system notifications");
-  } else if (Notification.permission === "granted") {
-    var notification = new Notification("Hi there!");
-
-    var text = "Notifications are enabled!";
-    var notification = new Notification("Webhook Alerts", {
-      body: text,
-      icon: img
-    });
   } else if (Notification.permission !== "denied") {
     Notification.requestPermission(function(permission) {
       if (permission === "granted") {
