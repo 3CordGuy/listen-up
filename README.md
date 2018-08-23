@@ -14,15 +14,20 @@ You can preview or try the [demo here](https://listenup.now.sh) courtesy of Zeit
 
 ## Tooling
 
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+This project uses:
+
+- [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications - used on the back-end and front-end
+- [Vue](https://vuejs.org) for some front-end (is currently rudimentary - see TODO section below)
+- [Bulma](https://bulma.org) for a quick-n-easy css framework
+- [mLab](https://mLab.com) for hosting a simple hobby instance of MongoDB
+
+## Data Handling and Storage
+
+MongoDB Data for the post requests is not persisted past 60 seconds. Webhook endpoints will expire after 24 hours if they are not used.
 
 ## TODO:
 
-There are a few things I'd like to do yet with this small project.
-
-- Data persistence
-
-  - Right now hooks persist up to 8 hours (without activity) but it lives in a filesystem db called NEDB. This works for a prototype, but is not good long term (maybe switch to a free/tinker tier of a hosted db would be ideal)
+There are a couple things I'd like to do yet with this small project.
 
 - UI Improvements
   - Build an "actual" SPA front-end (single-page app with router)? ;)

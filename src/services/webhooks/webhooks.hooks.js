@@ -1,13 +1,11 @@
-const { disallow, allow, iff, provider } = require('feathers-hooks-common');
-
-const autoId = require('../../hooks/auto-id');
+const { disallow, allow, iff, provider } = require('feathers-hooks-common')
 
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [autoId()],
+    create: [],
     update: [],
     patch: [],
     remove: []
@@ -32,4 +30,4 @@ module.exports = {
     patch: [],
     remove: []
   }
-};
+}

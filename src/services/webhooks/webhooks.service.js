@@ -1,5 +1,5 @@
 // Initializes the `webhooks` service on path `/webhooks`
-const createService = require('feathers-nedb');
+const createService = require('feathers-mongoose');
 const createModel = require('../../models/webhooks.model');
 const hooks = require('./webhooks.hooks');
 

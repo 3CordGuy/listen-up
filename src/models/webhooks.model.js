@@ -1,17 +1,23 @@
-const NeDB = require('nedb');
-const path = require('path');
+const hri = require('human-readable-ids').hri
 
-module.exports = function (app) {
-  const dbPath = app.get('nedb');
-  const Model = new NeDB({
-    filename: path.join(dbPath, 'webhooks.db'),
-    timestampData: true,
-    autoload: true
-  });
+module.exports = function(app) {
+  const mongooseClient = app.get('mongooseClient')
+  const { Schema } = mongooseClient
+  const webhooks = new Schema(
+    {
+      _id: {
+        type: String,
+        default: function() {
+          return hri.random()
+        }
+      },
+      updatedAt: { type: Date, index: { expires: '1d' } }
+    },
+    {
+      setDefaultsOnInsert: true,
+      timestamps: true
+    }
+  )
 
-  Model.ensureIndex({ fieldName: 'updatedAt', expireAfterSeconds: 28800 });
-
-  Model.persistence.setAutocompactionInterval(1000 * 60 * 30) // Compact data every 30 min
-
-  return Model;
-};
+  return mongooseClient.model('webhooks', webhooks)
+}
