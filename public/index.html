@@ -1,7 +1,8 @@
-<html>
+<!DOCTYPE html>
 
 <head>
   <title>Listen Up - Super Simple Webhook Testing</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Test your webhooks by using a simple generated endpoint and see your HTTP request come through in realtime.">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900" rel="stylesheet">
@@ -110,6 +111,15 @@
 
       {
       opacity: 0;
+    }
+
+    .panel-block-large {
+      padding: 30px 14px;
+    }
+
+    .emoji-lg {
+      font-size: 2em;
+      margin-right: 8px;
     }
   </style>
 </head>
@@ -224,7 +234,8 @@
                 </div>
               </transition>
             </post-block>
-            <div class="panel-block has-background-white" v-if="!posts.length">Yo! I'm listening for
+            <div class="panel-block has-background-white panel-block-large" v-if="!posts.length"><span class="emoji-lg">🎧</span>Yo!
+              I'm listening for
               <code>POST</code> requests with
               <code>Content-Type: application/json</code>. Send one to the endpoint above!
             </div>
@@ -269,6 +280,16 @@
         </footer>
       </div>
   </section>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124516605-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-124516605-2');
+  </script>
+
 </body>
 
 </html>
