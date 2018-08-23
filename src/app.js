@@ -17,6 +17,8 @@ const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 
+const mongoose = require('./mongoose');
+
 const app = express(feathers());
 const requestDetails = require('./request-details')
 
@@ -44,6 +46,8 @@ app.configure(socketio(function(io) {
     next();
   });
 }));
+
+app.configure(mongoose);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);

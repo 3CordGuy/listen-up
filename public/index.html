@@ -125,7 +125,9 @@
         <h2 class="subtitle is-size-5 has-text-centered">Super Simple Webhook Testing</h2>
         <!--CREATE HOOK BUTTON-->
         <div class="has-text-centered" v-if="!showListener">
-          <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook Endpoint</button>
+          <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook
+            Endpoint
+          </button>
         </div>
 
         <!--TOP MESSAGE PANEL-->
@@ -232,7 +234,7 @@
           </nav>
           <small class="tag is-warning">
             <em>Endpoint
-              <span v-show="willExpire">Expires {{ willExpire }}</span>. Data is not persisted.</em>
+              <span v-show="willExpire">Expires {{ willExpire }}</span> if not used. POST data is not persisted.</em>
           </small>
         </div>
         </div>
@@ -253,6 +255,11 @@
             <a href="https://github.com/3Cordguy/listen-up">
               <span class="icon is-large">
                 <i class="fab fa-2x fa-github-square"></i>
+              </span>
+            </a>
+            <a href="https://www.twitter.com/3CordGuy">
+              <span class="icon is-large">
+                <i class="fab fa-2x fa-twitter"></i>
               </span>
             </a>
             <a href="https://bulma.io">

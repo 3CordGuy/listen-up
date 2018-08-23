@@ -5,7 +5,9 @@
   "homepage": "https://github.com/3Cordguy/listen-up",
   "main": "src",
   "keywords": [
-    "feathers", "nedb", "bulma"
+    "feathers",
+    "nedb",
+    "bulma"
   ],
   "author": {
     "name": "",
@@ -37,9 +39,11 @@
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "feathers-hooks-common": "^4.15.0",
+    "feathers-mongoose": "^6.1.4",
     "feathers-nedb": "^3.1.0",
     "helmet": "^3.13.0",
     "human-readable-ids": "^1.0.4",
+    "mongoose": "^5.2.9",
     "nedb": "^1.8.0",
     "query-string": "^6.1.0",
     "serve-favicon": "^2.5.0",

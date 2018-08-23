@@ -2,6 +2,7 @@
   "name": "listen-up",
   "alias": "listenup.now.sh",
   "env": {
+    "NODE_ENV": "production",
     "MONGO_URL": "@listenup-mongo-url"
   }
 }

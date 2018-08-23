@@ -1,5 +1,5 @@
 // Initializes the `posts` service on path `/posts`
-const createService = require('feathers-nedb');
+const createService = require('feathers-mongoose');
 const createModel = require('../../models/posts.model');
 const hooks = require('./posts.hooks');
 

@@ -1,4 +1,4 @@
 {
-  "host": "listen-up-app.feathersjs.com",
-  "port": "PORT"
+  "host": "listenup.now.sh",
+  "mongodb": "MONGO_URL"
 }
