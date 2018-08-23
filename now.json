@@ -1,4 +1,7 @@
 {
   "name": "listen-up",
-  "alias": "listenup.now.sh"
+  "alias": "listenup.now.sh",
+  "env": {
+    "MONGO_URL": "@listenup-mongo-url"
+  }
 }
