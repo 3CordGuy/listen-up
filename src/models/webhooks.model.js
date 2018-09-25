@@ -11,7 +11,7 @@ module.exports = function(app) {
           return hri.random()
         }
       },
-      updatedAt: { type: Date, index: { expires: '1d' } }
+      updatedAt: { type: Date, index: { expires: '2d' } }
     },
     {
       setDefaultsOnInsert: true,
