@@ -6,7 +6,7 @@
   "main": "src",
   "keywords": [
     "feathers",
-    "nedb",
+    "mongo",
     "bulma"
   ],
   "author": {
@@ -44,7 +44,6 @@
     "helmet": "^3.13.0",
     "human-readable-ids": "^1.0.4",
     "mongoose": "^5.2.9",
-    "nedb": "^1.8.0",
     "query-string": "^6.1.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.0.0"
