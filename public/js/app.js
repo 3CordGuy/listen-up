@@ -55,12 +55,7 @@ var listen_vue = new Vue({
     },
     createHook: async function(data) {
       const hook = await client.service('webhooks').create({})
-      const url = [
-        location.protocol,
-        '//',
-        location.host,
-        location.pathname
-      ].join('')
+      const url = `${location.protocol}//${location.host}${location.pathname}`
       this.currentHookId = hook._id
       window.location.href = url + `?listen=${hook._id}`
 
@@ -125,10 +120,9 @@ var listen_vue = new Vue({
     this.showListener = true
     this.currentHookId = _id
 
-    this.currentEndpoint =
-      [location.protocol, '//', location.host, location.pathname].join('') +
-      'test/' +
-      _id
+    this.currentEndpoint = `${location.protocol}//${location.host}${
+      location.pathname
+    }test/${_id}`
   }
 })
 
