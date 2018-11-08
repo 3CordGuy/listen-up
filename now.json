@@ -1,6 +1,7 @@
 {
   "name": "listen-up",
   "alias": "listenup.now.sh",
+  "version": 1,
   "env": {
     "NODE_ENV": "production",
     "MONGO_URL": "@listenup-mongo-url"
