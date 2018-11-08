@@ -23,7 +23,7 @@ This project uses:
 
 ## Data Handling and Storage
 
-MongoDB Data for the post requests is not persisted past 60 seconds. Webhook endpoints will expire after 24 hours if they are not used.
+MongoDB Data for the post requests is not persisted past 60 seconds. Webhook endpoints will expire after 48 hours if they are not used.
 
 ## TODO:
 
