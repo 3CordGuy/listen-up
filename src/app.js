@@ -1,26 +1,25 @@
-const path = require('path');
-const favicon = require('serve-favicon');
-const compress = require('compression');
-const helmet = require('helmet');
-const cors = require('cors');
-const logger = require('./logger');
-const queryString = require('query-string');
+const path = require("path");
+const favicon = require("serve-favicon");
+const compress = require("compression");
+const helmet = require("helmet");
+const cors = require("cors");
+const logger = require("./logger");
+const queryString = require("query-string");
 
-const feathers = require('@feathersjs/feathers');
-const configuration = require('@feathersjs/configuration');
-const express = require('@feathersjs/express');
-const socketio = require('@feathersjs/socketio');
+const feathers = require("@feathersjs/feathers");
+const configuration = require("@feathersjs/configuration");
+const express = require("@feathersjs/express");
+const socketio = require("@feathersjs/socketio");
 
+const middleware = require("./middleware");
+const services = require("./services");
+const appHooks = require("./app.hooks");
+const channels = require("./channels");
 
-const middleware = require('./middleware');
-const services = require('./services');
-const appHooks = require('./app.hooks');
-const channels = require('./channels');
-
-const mongoose = require('./mongoose');
+const mongoose = require("./mongoose");
 
 const app = express(feathers());
-const requestDetails = require('./request-details')
+const requestDetails = require("./request-details");
 
 // Load app configuration
 app.configure(configuration());
@@ -30,22 +29,23 @@ app.use(cors());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
+app.use(favicon(path.join(app.get("public"), "favicon.ico")));
 // Host the public folder
-app.use('/', express.static(app.get('public')));
+app.use("/", express.static(app.get("public")));
 
 // Set up Plugins and providers
-app.configure(express.rest())
-	.use(requestDetails);
-app.configure(socketio(function(io) {
-	// Registering Socket.io middleware
-  io.use(function (socket, next) {
-    const url = queryString.parseUrl(socket.request.headers.referer);
-		const webhook = url.query.listen;
-    socket.feathers.webhook = webhook;
-    next();
-  });
-}));
+app.configure(express.rest()).use(requestDetails);
+app.configure(
+  socketio(function(io) {
+    // Registering Socket.io middleware
+    io.use(function(socket, next) {
+      const url = queryString.parseUrl(socket.request.headers.referer);
+      const webhook = url.query.listen;
+      socket.feathers.webhook = webhook;
+      next();
+    });
+  })
+);
 
 app.configure(mongoose);
 
