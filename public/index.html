@@ -4,43 +4,42 @@
   <title>Listen Up - Super Simple Webhook Testing</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Test your webhooks by using a simple generated endpoint and see your HTTP request come through in realtime.">
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" rel="stylesheet">
+  <meta name="description"
+    content="Test your webhooks by using a simple generated endpoint and see your HTTP request come through in realtime.">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
   <script src="js/notifications.js"></script>
 
   <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    html {
+      font-family: 'Inter', sans-serif;
+    }
+
+    @supports (font-variation-settings: normal) {
+      html {
+        font-family: 'Inter var', sans-serif;
+      }
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    .has-text-centered {
-      text-align: center;
-    }
-
     .title-text {
       font-weight: bold;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', serif;
     }
 
     h1,
     h2,
     h3,
     h4 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    h1 {
-      font-weight: 900;
-    }
-
-    h2 {
-      font-size: 2em;
-      font-weight: 100;
+      font-family: 'Inter', serif;
     }
 
     .spinner {
@@ -65,13 +64,10 @@
       0% {
         transform: rotate(0deg);
       }
+
       100% {
         transform: rotate(360deg);
       }
-    }
-
-    #app {
-      margin: 20px auto;
     }
 
     .hidden {
@@ -96,6 +92,8 @@
     }
 
     code {
+      color: #553c9a;
+      background-color: #f4f4f4;
       margin-left: 3px;
       margin-right: 3px;
     }
@@ -125,161 +123,151 @@
 </head>
 
 <body>
-  <section class="hero is-warning is-bold is-fullheight">
-    <div class="hero-body">
-      <div id="app" class="container" v-cloak>
-        <h1 class="has-text-centered" style="font-size: 5em;">
-          <i class="fas fa-headphones"></i>
-        </h1>
-        <h1 class="title has-text-centered is-size-1">Listen Up</h1>
-        <h2 class="subtitle is-size-5 has-text-centered">Super Simple Webhook Testing</h2>
-        <!--CREATE HOOK BUTTON-->
-        <div class="has-text-centered" v-if="!showListener">
-          <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook
+  <div id="app" class="flex" v-cloak>
+    <!-- TITLE COL -->
+    <div class="w-1/3 bg-indigo-900 h-screen flex flex-col border-r">
+      <div class="w-full flex-grow flex flex-col justify-end text-white text-center">
+        <div>
+          <h1 class="font-bold text-5xl">
+            <i class="fas fa-headphones"></i>&nbsp;Listen Up
+          </h1>
+          <h2 class="font-thin text-2xl">Super Simple Webhook Testing</h2>
+        </div>
+
+        <div class="mt-4" v-if="!showListener">
+          <button
+            class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+            v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">Create New Hook
             Endpoint
           </button>
         </div>
-
-        <!--TOP MESSAGE PANEL-->
-        <article class="message is-dark" v-if="showListener">
-          <div class="message-header">
-            <span v-if="!staleHook">
-              <p>
-                <i class="far fa-check-circle"></i> Endpoint Ready
-
-              </p>
+      </div>
+      <div class="w-full flex justify-center flex-grow text-white text-center font-hairline">
+        <div class="footer flex flex-row content-center self-end pb-4">
+          <a class="mr-2" href="https://github.com/3Cordguy/listen-up">
+            <span>
+              <i class="fab fa-2x fa-github-square"></i>
             </span>
-            <span v-if="staleHook">
-              <p>
-                <i class="fas fa-ban"></i> Endpoint Expired</p>
+          </a>
+          <a class="mr-2" href="https://www.twitter.com/3CordGuy">
+            <span>
+              <i class="fab fa-2x fa-twitter"></i>
             </span>
+          </a>
+          <div>
+            Listen Up &copy; 2020 Josh Weaver
           </div>
-          <div class="message-body">
-            <div class="field">
-              <div class="field-body">
-                <div class="field has-addons">
-                  <div class="control">
-                    <button class="button is-dark" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
-                      <span class="icon is-small">
-                        <i class="fas fa-plus"></i>
-                      </span>
-                      <span>New Endpoint</span>
-                    </button>
-                  </div>
-                  <div class="control is-expanded">
-                    <input class="input is-dark" type="text" v-model="currentEndpoint" id="endpoint" readonly>
-                  </div>
-                  <div class="control">
-                    <a class="button is-info" v-on:click="copyText">
-                      <span class="icon is-small">
-                        <i class="fas fa-copy"></i>
-                      </span>
-                      <span>Copy</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+        </div>
+      </div>
+    </div>
+    <!-- CONTENT COL -->
+    <div class="w-2/3 bg-gray-100 h-screen flex flex-col p-4">
+      <div class="w-full flex justify-between items-center mb-4">
+        <div class="md:w-2/3 flex-row border pl-4 pr-4 py-1 rounded border-gray-300" v-if="!staleHook">
+          <span class="w-1/3 pr-4 border-r font-bold"><span class="spinner mr-2"></span> Endpoint Ready</span>
+          <input
+            class="w-2/3 pl-3 appearance-none bg-gray-100 border-none text-purple-800 leading-tight focus:outline-none"
+            type="text" v-model="currentEndpoint" id="endpoint" readonly>
+        </div>
+        <div class="">
+          <button
+            class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+            v-on:click="copyText">
+            <i class="fas fa-copy mr-2"></i>Copy
+          </button>
+          <button
+            class="flex-shrink-0 border-transparent border-4 text-teal-500 hover:text -teal-800 text-sm py-1 px-2 rounded"
+            v-bind:class="{ 'is-loading': isLoading }" v-on:click="createHook">
+            New Endpoint
+          </button>
+        </div>
+      </div>
+      <div class="overflow-scroll">
+        <!--ERROR MESSAGE PANEL-->
+        <div class="message is-danger" v-if="staleHook">
+          <div class="text-center py-4 lg:px-4">
+            <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
+              role="alert">
+              <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">Endpoint Expired </span>
+              <span class="font-semibold mr-2 text-left flex-auto">Looks like you need a <a class="underline cursor-pointer" v-on:click="createHook">new endpoint</a> or to <a
+                  class="underline cursor-pointer" v-on:click="renewHook">renew your existing one</a>.</span>
+              <svg class="fill-current opacity-75 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+                </svg>
             </div>
           </div>
-        </article>
+        </div>
 
-        <!--ERROR MESSAGE PANEL-->
-        <article class="message is-danger" v-if="staleHook">
-          <div class="message-body">
-            <p>Looks like you need a new endpoint or to renew your existing one.</p>
-            <button class="button is-gray is-small is-centered" v-on:click="renewHook">Renew Endpoint</button>
-        </article>
+        <div class="w-full mb-4 flex flex-col flex-grow text-gray-700 border rounded border-gray-300 shadow ">
+          <!--NO POSTS START-->
+          <div class="m-4 self-center" v-if="!posts.length">
+            <h1 class="text-4xl text-center font-extrabold text-gray-800"><span class="text-5xl mr-2">🎧</span>Yo! I'm
+              listening!</h1 class="text-4xl">
 
-        <!--LISTENER LIST PANEL-->
-        <div id="listen" v-if="showRequests">
-          <nav class="panel">
-            <p class="panel-heading is-clearfix">
-              <span class="spinner"></span>
-              Listening for Requests...
-              <button class="button is-small is-pulled-right" v-on:click="clearList">Clear List</button>
-              <span class="count tag is-rounded is-small is-pulled-right">Received {{count}}</span>
+            <p class="text-sm">Send <code>POST</code> requests with
+              <code>Content-Type: application/json</code> to <code v-text="currentEndpoint"></code>!
             </p>
+          </div>
+          <!--/NO POSTS-->
+          <!--POST LIST-->
+          <div id="listen" class="w-full" v-if="showRequests">
+            <div class="pb-2 pt-2 flex flex-row border-b justify-between overflow-hidden" v-if="posts.length">
+              <span class="font-bold border border-teal-100 text-purple-800 font-bold py-2 px-4 rounded-full">Received
+                {{count}}</span>
+              <button class="mr-4 text-red-500 text-sm" v-on:click="clearList">Clear List</button>
+            </div>
             <post-block v-for="post in posts" v-bind:post="post" :key="post._id" inline-template>
               <transition name="fade">
-                <div class="panel-block has-background-white">
-                  <div class="columns">
-                    <div class="column is-2">
-                      <div class="field">
-                        <div class="tag is-light">{{ post.time }}</div>
-                      </div>
-                      <div class="field">
-                        <a class="button is-small" @click="toggleHeaders">
-                          <span class="icon is-small">
-                            <i class="fas fa-eye"></i>
-                          </span>
-                          <span>
-                            {{ showHide }} Headers
-                          </span>
-                        </a>
-                      </div>
+                <div class="flex flex-row border-b overflow-hidden">
+                  <div class="w-1/4 p-4 flex flex-col justify-between">
+                    <div class="">
+                      <div class="font-bold">Received At</div>
+                      <div class="font-thin text-sm">{{ post.time }}</div>
                     </div>
-                    <div class="column is-10">
-                      <transition name="fade">
-                        <div v-show="showHeaders">
-                          <div class="field">
-                            <pre>{{ post.headers }}</pre>
-                          </div>
+                    <div class="">
+                      <a class="cursor-pointer hover:text-purple-800" @click="toggleHeaders">
+                        <span class="icon is-small">
+                          <i class="fas fa-eye"></i>
+                        </span>
+                        <span>
+                          {{ showHide }} Headers
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="w-3/4 p-4">
+                    <transition name="fade">
+                      <div v-show="showHeaders">
+                        <div class="bg-gray-200 border rounded p-2 overflow-hidden mb-2">
+                          <pre>{{ post.headers }}</pre>
                         </div>
-                      </transition>
-                      <div class="field">
-                        <pre>{{ post.payload }}</pre>
                       </div>
+                    </transition>
+                    <div class="bg-gray-200 border rounded p-2 overflow-hidden">
+                      <pre>{{ post.payload }}</pre>
                     </div>
                   </div>
                 </div>
               </transition>
             </post-block>
-            <div class="panel-block has-background-white panel-block-large" v-if="!posts.length"><span class="emoji-lg">🎧</span>Yo!
-              I'm listening for
-              <code>POST</code> requests with
-              <code>Content-Type: application/json</code>. Send one to the endpoint above!
-            </div>
-            <div class="panel-block has-background-light">
-              <button class="button is-small" v-on:click="clearList">Clear List</button>
-            </div>
-          </nav>
-          <small class="tag is-warning">
+          </div>
+          <!--/POST LIST-->
+        </div>
+        <div class="text-center">
+          <small>
             <em>Endpoint
               <span v-show="willExpire">Expires {{ willExpire }}</span> if not used. POST data is not persisted.</em>
           </small>
         </div>
-        </div>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
-        <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>
-        <script src="js/app.js"></script>
+
       </div>
-      <div class="hero-foot is-warning is-bold">
-        <footer class="footer">
-          <div class="content has-text-centered">
-            <div>
-              Listen Up &copy; 2018 Josh Weaver
-            </div>
-            <a href="https://github.com/3Cordguy/listen-up">
-              <span class="icon is-large">
-                <i class="fab fa-2x fa-github-square"></i>
-              </span>
-            </a>
-            <a href="https://www.twitter.com/3CordGuy">
-              <span class="icon is-large">
-                <i class="fab fa-2x fa-twitter"></i>
-              </span>
-            </a>
-            <a href="https://bulma.io">
-              <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
-            </a>
-          </div>
-        </footer>
-      </div>
-  </section>
+      <!--/scroll-->
+    </div>
+    <!--/#app-->
+  </div>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124516605-2"></script>
   <script>
@@ -290,6 +278,11 @@
     gtag('config', 'UA-124516605-2');
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.1/URI.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 
 </html>
