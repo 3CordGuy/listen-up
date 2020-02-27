@@ -161,8 +161,8 @@
       </div>
     </div>
     <!-- CONTENT COL -->
-    <div class="w-2/3 bg-gray-100 h-screen flex flex-col p-4">
-      <div class="w-full flex justify-between items-center mb-4">
+    <div class="w-2/3 bg-gray-100 h-screen flex flex-col p-4" v-if="showRequests">
+      <div class="w-full flex justify-between items-center mb-4" >
         <div class="md:w-2/3 flex-row border pl-4 pr-4 py-1 rounded border-gray-300" v-if="!staleHook">
           <span class="w-1/3 pr-4 border-r font-bold"><span class="spinner mr-2"></span> Endpoint Ready</span>
           <input
@@ -265,6 +265,16 @@
       </div>
       <!--/scroll-->
     </div>
+    <div class="w-2/3 bg-gray-100 h-screen flex flex-col p-4 justify-center items-center" v-if="!showRequests">
+      <div class="md:w-2/3 bg-indigo-200 p-4 rounded">
+        <h1 class="text-xl font-bold mb-2">How do I use this?</h1>
+        <p>Create a webhook endpoint, then make an HTTP <strong>POST</strong> request to it. We will catch the data. <small><em>Don't worry. Your data doesn't persist</em></small>.</p>
+        <img class="mt-4" src="./assets/listen-up.png" alt="listen-up realtime webhook tool">
+        <h1 class="text-xl font-bold mt-4 mb-2">What is this good for?</h1>
+        <p>Listen Up can be a tool for testing if your webhook/web callback or server is sending information properly. <strong>In other words, it catches data you throw at it</strong>. This data is displayed in realtime using websockets and easily visible.</p>
+        <p class="mt-4">No need to hunt for data in a database to see if the proper data is coming across.</p>
+        <p class="mt-4"><em>Give it a try!</em></p>
+      </div>
     <!--/#app-->
   </div>
 
