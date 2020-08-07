@@ -1,4 +1,5 @@
 {
   "host": "listen-up-yo.herokuapp.com/",
-  "mongodb": null
+  "mongodb": null,
+  "port": 5000
 }
