@@ -1,4 +1,4 @@
 {
-  "host": "listenup.now.sh",
-  "mongodb": "MONGO_URL"
+  "host": "listen-up-yo.herokuapp.com/",
+  "mongodb": null
 }

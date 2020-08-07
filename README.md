@@ -8,9 +8,9 @@
 
 **Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to generated endpoints in realtime. This is meant to be useful for prototyping and developing [webhooks](https://en.wikipedia.org/wiki/Webhook).
 
-You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Zeit Now](https://zeit.co/now)).
+You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Heroku](https://heroku.com) since Zeit shut down "traditional node app" v1 hosting).
 
-You can preview or try the [demo here](https://listenup.now.sh) courtesy of Zeit. :)
+You can preview or try the [demo here](https://listen-up-yo.herokuapp.com/) courtesy of Heroku. :)
 
 ## Tooling
 
@@ -18,7 +18,7 @@ This project uses:
 
 - [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications - used on the back-end and front-end
 - [Vue](https://vuejs.org) for some front-end (is currently rudimentary - see TODO section below)
-- [Bulma](https://bulma.org) for a quick-n-easy css framework
+- [Tailwind](https://tailwindcss.com) for a fantastic utility-class css framework
 - [mLab](https://mLab.com) for hosting a simple hobby instance of MongoDB
 
 ## Data Handling and Storage
@@ -30,7 +30,6 @@ MongoDB Data for the post requests is not persisted past 60 seconds. Webhook end
 There are a couple things I'd like to do yet with this small project.
 
 - UI Improvements
-  - Build an "actual" SPA front-end (single-page app with router)? ;)
   - Improve Notification system
 
 ## Getting Started
