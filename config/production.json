@@ -1,5 +1,6 @@
 {
+  "frontend": "./public",
   "host": "listen-up-yo.herokuapp.com",
-  "mongodb": null,
-  "port": 5000
+  "mongodb": "MONGO_URL",
+  "port": "PORT"
 }
