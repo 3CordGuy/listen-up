@@ -1,6 +1,6 @@
 const socket = io();
 const client = feathers();
-const expiresAfterHours = 48;
+const expiresAfterHours = 72;
 
 client.configure(feathers.socketio(socket));
 
