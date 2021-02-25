@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
     content="Test your webhooks by using a simple generated endpoint and see your HTTP request come through in realtime.">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.2.0/tailwind.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.0/tailwind.min.css" rel="stylesheet">
   <script defer src="//use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
   <script src="js/notifications.js"></script>
@@ -125,7 +125,7 @@
 <body>
   <div id="app" class="flex" v-cloak>
     <!-- TITLE COL -->
-    <div class="w-1/3 bg-indigo-900 h-screen flex flex-col border-r">
+    <div class="w-full sm:w-1/3 bg-indigo-900 md:h-screen flex flex-col border-r">
       <div class="w-full flex-grow flex flex-col justify-end text-white text-center">
         <div>
           <h1 class="font-bold text-5xl">
@@ -155,13 +155,13 @@
             </span>
           </a>
           <div>
-            Listen Up &copy; 2020 Josh Weaver
+            Listen Up &copy; 2021 Josh Weaver
           </div>
         </div>
       </div>
     </div>
     <!-- CONTENT COL -->
-    <div class="w-2/3 bg-gray-100 h-screen flex flex-col p-4" v-if="showRequests">
+    <div class="w-full sm:w-2/3 bg-gray-100 h-screen flex flex-col p-4" v-if="showRequests">
       <div class="w-full flex justify-between items-center mb-4" >
         <div class="md:w-2/3 flex-row border pl-4 pr-4 py-1 rounded border-gray-300" v-if="!staleHook">
           <span class="w-1/3 pr-4 border-r font-bold"><span class="spinner mr-2"></span> Endpoint Ready</span>
@@ -215,6 +215,7 @@
               <span class="font-bold border border-teal-100 text-purple-800 font-bold py-2 px-4 rounded-full">Received
                 {{count}}</span>
               <button class="mr-4 text-red-500 text-sm" v-on:click="clearList">Clear List</button>
+              <textarea id="copy-area" class="absolute" readonly style="right: 2000px;"></textarea>
             </div>
             <post-block v-for="post in posts" v-bind:post="post" :key="post._id" inline-template>
               <transition name="fade">
@@ -225,14 +226,14 @@
                       <div class="font-thin text-sm">{{ post.time }}</div>
                     </div>
                     <div class="">
-                      <a class="cursor-pointer hover:text-purple-800" @click="toggleHeaders">
+                      <button class="text-sm hover:text-purple-800" @click="toggleHeaders">
                         <span class="icon is-small">
                           <i class="fas fa-eye"></i>
                         </span>
                         <span>
                           {{ showHide }} Headers
                         </span>
-                      </a>
+                      </button>
                     </div>
                   </div>
                   <div class="w-3/4 p-4">
@@ -243,7 +244,11 @@
                         </div>
                       </div>
                     </transition>
-                    <div class="bg-gray-200 border rounded p-2 overflow-hidden">
+                    <div class="bg-gray-200 border rounded p-2 relative overflow-hidden shadow-inner" v-bind:class="[isExpanded ? '' : 'h-24']">
+                      <div class="absolute right-0 mr-4 flex flex-row justify-end">
+                        <button class="text-indigo-600 self-end px-2 mr-2 text-sm" v-on:click="toggleExpanded">{{ expandCollapse }}</button>
+                        <button class="text-white-200 bg-gray-300 hover:bg-gray-400 rounded-sm self-end px-2 text-sm" v-on:click="copyPayload">{{copyText}}</button>
+                      </div>
                       <pre>{{ post.payload }}</pre>
                     </div>
                   </div>

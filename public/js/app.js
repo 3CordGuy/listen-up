@@ -128,17 +128,44 @@ Vue.component("post-block", {
   props: ["post"],
   data: function() {
     return {
-      showHeaders: false
+      isExpanded: false,
+      showHeaders: false,
+      copyText: "Copy"
     };
   },
   computed: {
     showHide: function() {
       return this.showHeaders ? "Hide" : "Show";
+    },
+    expandCollapse: function() {
+      return this.isExpanded ? "Collapse" : "Expand";
+    }
+  },
+  unmounted: function(){
+    if (this.copyTimer) {
+      clearTimeout(this.copyTimer)
     }
   },
   methods: {
+    copyPayload: function(e) {
+      var payloadCopy = document.getElementById("copy-area");
+      payloadCopy.value = JSON.stringify(this.post.payload, null, 2);
+      payloadCopy.select();
+
+      if (typeof document.execCommand === "function") {
+        document.execCommand("copy");
+        this.copyText = "Copied!";
+      }
+
+      this.copyTimer = setTimeout(() => {
+        this.copyText = "Copy"
+      }, 2000);
+    },
     toggleHeaders: function(e) {
       this.showHeaders = !this.showHeaders;
+    },
+    toggleExpanded: function(e) {
+      this.isExpanded = !this.isExpanded;
     }
   }
 });
