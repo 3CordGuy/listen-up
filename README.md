@@ -1,64 +1,38 @@
-# listen-up
+# create-svelte
 
-> Super Simple Webhook Listeners - [View Live App](https://listenup.now.sh)
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
 
-![Listen Up Screenshot](listen-up.png)
+## Creating a project
 
-## About
+If you're seeing this, you've probably already done this step. Congrats!
 
-**Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to generated endpoints in realtime. This is meant to be useful for prototyping and developing [webhooks](https://en.wikipedia.org/wiki/Webhook).
+```bash
+# create a new project in the current directory
+npm init svelte@next
 
-You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Heroku](https://heroku.com) since Zeit shut down "traditional node app" v1 hosting).
+# create a new project in my-app
+npm init svelte@next my-app
+```
 
-You can preview or try the [demo here](https://listen-up-yo.herokuapp.com/) courtesy of Heroku. :)
+> Note: the `@next` is temporary
 
-## Tooling
+## Developing
 
-This project uses:
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-- [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications - used on the back-end and front-end
-- [Vue](https://vuejs.org) for some front-end (is currently rudimentary - see TODO section below)
-- [Tailwind](https://tailwindcss.com) for a fantastic utility-class css framework
-- [mLab](https://mLab.com) for hosting a simple hobby instance of MongoDB
+```bash
+npm run dev
 
-## Data Handling and Storage
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-MongoDB Data for the post requests is not persisted past 60 seconds. Webhook endpoints will expire after 48 hours if they are not used.
+## Building
 
-## TODO:
+Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
 
-There are a couple things I'd like to do yet with this small project.
+```bash
+npm run build
+```
 
-- UI Improvements
-  - Improve Notification system
-
-## Getting Started
-
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-2. Install your dependencies
-
-   ```
-   cd path/to/listen-up;
-
-   npm install
-   ```
-
-3. Start your app
-
-   ```
-   npm start
-   ```
-
-## Pull Requests
-
-Sure. If you want to make it better. But really this is just for helping me test and deal with webhooks with work projects.
-
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
-
-## License
-
-Copyright (c) 2018
-
-Licensed under the [MIT license](LICENSE).
+> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
