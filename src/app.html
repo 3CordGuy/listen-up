@@ -4,10 +4,121 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.0/tailwind.min.css" rel="stylesheet">
+    <script defer src="//use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.min.js"></script>
+    <style>
+    @import url('//rsms.me/inter/inter.css');
+
+    html {
+      font-family: 'Inter', sans-serif;
+    }
+
+    @supports (font-variation-settings: normal) {
+      html {
+        font-family: 'Inter var', sans-serif;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .title-text {
+      font-weight: bold;
+      font-family: 'Inter', serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Inter', serif;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+    }
+
+    .spinner:after {
+      content: " ";
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin: 2px auto;
+      border-radius: 50%;
+      border: 5px solid #333;
+      border-color: #333 transparent #333 transparent;
+      animation: spinner 1.5s linear infinite;
+    }
+
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .expanded {
+      display: block;
+    }
+
+    .columns {
+      width: 100%
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+
+    .count {
+      margin-top: 2px;
+      margin-right: 4px;
+    }
+
+    code {
+      color: #553c9a;
+      background-color: #f4f4f4;
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity .2s;
+    }
+
+    .fade-enter,
+    .fade-leave-to
+    /* .fade-leave-active below version 2.1.8 */
+
+      {
+      opacity: 0;
+    }
+
+    .panel-block-large {
+      padding: 30px 14px;
+    }
+
+    .emoji-lg {
+      font-size: 2em;
+      margin-right: 8px;
+    }
+  </style>
 		%svelte.head%
 	</head>
 	<body>
 		<div id="svelte">%svelte.body%</div>
-    <div>This is a test</div>
 	</body>
 </html>
