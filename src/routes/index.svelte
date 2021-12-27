@@ -1,5 +1,23 @@
 <script>
   import Layout from "../layout/main.svelte";
+  import { posts } from '../stores.js';
+  import { navigating, page } from '$app/stores';
+  import { onDestroy } from 'svelte'
+
+  let mainPosts = []
+
+  const postUnsubscribe = posts.subscribe(value => mainPosts = value)
+  // page.subscribe()
+
+
+  console.log($page.query.get('listen'))
+  // let query = new URLSearchParams(window.location.search)
+  // let listenTo = query.get('listen')
+
+  console.log(mainPosts)
+
+
+  onDestroy(postUnsubscribe)
 </script>
 
 <svelte:head>
