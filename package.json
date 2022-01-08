@@ -2,6 +2,7 @@
   "name": "listen-up",
   "version": "0.0.1",
   "scripts": {
+    "wrangler:dev": "npx wrangler pages dev -- npx svelte-kit dev",
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
@@ -15,7 +16,8 @@
     "eslint-plugin-svelte3": "^3.2.1",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
-    "svelte": "^3.42.6"
+    "svelte": "^3.42.6",
+    "wrangler@beta": "^0.0.7"
   },
   "type": "module",
   "dependencies": {
