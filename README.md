@@ -16,10 +16,10 @@ You can preview or try the [demo here](https://listen-up-yo.herokuapp.com/) cour
 
 This project uses:
 
-- [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications - used on the back-end and front-end
-- [Vue](https://vuejs.org) for some front-end (is currently rudimentary - see TODO section below)
+- [Feathers](http://feathersjs.com). An open source web framework for building simple real-time applications - used on the back-end and front-end
+- [Vue](https://vuejs.org) for some front-end (is currently rudimentary)
 - [Tailwind](https://tailwindcss.com) for a fantastic utility-class css framework
-- [mLab](https://mLab.com) for hosting a simple hobby instance of MongoDB
+- Atlas for hosting a simple hobby instance of MongoDB
 
 ## Data Handling and Storage
 

@@ -7,7 +7,7 @@
   "keywords": [
     "feathers",
     "mongo",
-    "bulma"
+    "tailwind"
   ],
   "author": {
     "name": "",
@@ -23,9 +23,10 @@
     "test": "yarn run eslint && yarn run mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "deploy": "now rm listen-up --safe --yes && now --public && now alias",
-    "start": "node src/",
+    "start": "node src/index.js",
     "mocha": "mocha test/ --recursive --exit"
   },
+  "engines" : { "node" : "12.22.6" },
   "dependencies": {
     "@feathersjs/configuration": "^2.0.0",
     "@feathersjs/errors": "^3.3.0",
