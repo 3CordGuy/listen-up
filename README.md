@@ -8,9 +8,9 @@
 
 **Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to generated endpoints in realtime. This is meant to be useful for prototyping and developing [webhooks](https://en.wikipedia.org/wiki/Webhook).
 
-You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Heroku](https://heroku.com) since Zeit shut down "traditional node app" v1 hosting).
+You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Heroku](https://heroku.com) or [Fly.io](fly.io)).
 
-You can preview or try the [demo here](https://listen-up-yo.herokuapp.com/) courtesy of Heroku. :)
+You can preview or try the [demo here](https://heylistenup.app/) courtesy of Fly.io. :)
 
 ## Tooling
 
