@@ -1,6 +1,6 @@
 # listen-up
 
-> Super Simple Webhook Listeners - [View Live App](https://listenup.now.sh)
+> Super Simple Webhook Listeners - [View Live App](https://heylistenup.app/)
 
 ![Listen Up Screenshot](listen-up.png)
 
