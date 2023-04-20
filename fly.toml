@@ -1,6 +1,7 @@
 # fly.toml file generated for listen-up on 2022-01-23T18:14:38-05:00
 
 app = "listen-up"
+app_name = "listen-up"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
