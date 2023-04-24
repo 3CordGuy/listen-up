@@ -49,6 +49,8 @@ There are a couple things I'd like to do yet with this small project.
    npm start
    ```
 
+To test and Develop Locally you will need a MongoDB instance running locally at `mongodb://localhost:27017/listen_up`.
+
 ## Pull Requests
 
 Sure. If you want to make it better. But really this is just for helping me test and deal with webhooks with work projects.
@@ -59,6 +61,6 @@ For more information on all the things you can do with Feathers visit [docs.feat
 
 ## License
 
-Copyright (c) 2018
+Copyright (c) 2018-2023
 
 Licensed under the [MIT license](LICENSE).
