@@ -26,7 +26,9 @@
     "start": "node src/index.js",
     "mocha": "mocha test/ --recursive --exit"
   },
-  "engines" : { "node" : "12.22.6" },
+  "engines": {
+    "node": "16.18.1"
+  },
   "dependencies": {
     "@feathersjs/configuration": "^2.0.0",
     "@feathersjs/errors": "^3.3.0",
@@ -36,7 +38,7 @@
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "feathers-hooks-common": "^4.15.0",
-    "feathers-mongoose": "^6.1.4",
+    "feathers-mongoose": "^6.0.11",
     "feathers-nedb": "^3.1.0",
     "helmet": "^3.13.0",
     "human-readable-ids": "^1.0.4",

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
-module.exports = function(app) {
+module.exports = function (app) {
   mongoose.connect(app.get("mongodb") || process.env.MONGO_URL, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   });
   mongoose.set("useCreateIndex", true);
   mongoose.Promise = global.Promise;
