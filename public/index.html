@@ -155,7 +155,7 @@
             </span>
           </a>
           <div>
-            Listen Up &copy; 2021 Josh Weaver
+            Listen Up &copy; {{new Date().getFullYear()}} Josh Weaver
           </div>
         </div>
       </div>
@@ -261,7 +261,7 @@
         <div class="text-center">
           <small>
             <em>Endpoint
-              <span v-show="willExpire">Expires {{ willExpire }}</span> if not used. POST data is not persisted.</em>
+              <span v-show="willExpire">Expires {{ willExpire }}</span> if not used. Your POST data is not persisted or stored!</em>
           </small>
         </div>
 
