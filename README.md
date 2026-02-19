@@ -1,3 +1,5 @@
+Developer Note: While this tool has been useful, I am not longer maintaining it and am going to pursue building a more robust successor to this app. Thank you to all who have used it over the years and encouraged me to continue working on it.
+
 # listen-up
 
 > Super Simple Webhook Listeners - [View Live App](https://heylistenup.app/)
@@ -8,9 +10,8 @@
 
 **Listen Up** is a very rudimentary webhook listening platform that will display your `POST` requests to generated endpoints in realtime. This is meant to be useful for prototyping and developing [webhooks](https://en.wikipedia.org/wiki/Webhook).
 
-You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform (I recommend [Heroku](https://heroku.com) or [Fly.io](fly.io)).
+You can run it locally and tunnel your requests (using [ngrok](https://ngrok.com/)) to port 3030 to see them come through. Or you can deploy it to a platform like hosting platform.
 
-You can preview or try the [demo here](https://heylistenup.app/) courtesy of Fly.io. :)
 
 ## Tooling
 
