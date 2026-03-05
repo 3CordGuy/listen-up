@@ -1,8 +1,11 @@
 Developer Note: While this tool has been useful, I am not longer maintaining it and am going to pursue building a more robust successor to this app. Thank you to all who have used it over the years and encouraged me to continue working on it.
 
+# NOTE FROM DEVELOPER:
+I no longer work on this project, but have moved on to work on a successor platform. If you're looking for a quick solution with persistent data that will get you up and running quickly, you can [check out the new HeyListenUp](https://heylistenup.app/).
+
 # listen-up
 
-> Super Simple Webhook Listeners - [View Live App](https://heylistenup.app/)
+> Super Simple Webhook Listeners
 
 ![Listen Up Screenshot](listen-up.png)
 
